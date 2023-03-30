@@ -1,10 +1,11 @@
 class Polygon{
     constructor(
         points = [],
-        color = '#ee8448'
+        color = '#ee8448',
+        center = new Point
     ){
     this.points = points;
-    this.center = new Point;
+    this.center = center;
     this.distance = 0;
     this.lumen = 1;
     this.color = this.hexToRgb(color);

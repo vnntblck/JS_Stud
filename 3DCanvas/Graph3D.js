@@ -1,24 +1,24 @@
-class Graph3D  {
+class Graph3D {
     constructor(param) {
         this.WIN = {
             LEFT: -5,
             BOTTOM: -5,
             HEIGHT: 10,
             WIDTH: 10,
-            DISPLAY: new Point(0,0,30),
-            CAMERA: new Point(0,0,50), 
+            DISPLAY: new Point(0, 0, 30),
+            CAMERA: new Point(0, 0, 50),
         };
         const height = 1000;
         const width = 1000;
         this.figureNumber = 0;
-        this.figures = [(new Figure).cube(5)];
+        this.figures = [new Cube(5)];
         this.canMove = false;
 
         this.dx = 0;
         this.dy = 0;
-        this.math3D = new Math3D ({WIN: this.WIN});
-        this.canvas = new Canvas ({
-            id: "canvas3d", 
+        this.math3D = new Math3D({ WIN: this.WIN });
+        this.canvas = new Canvas({
+            id: "canvas3d",
             WIN: this.WIN,
             height,
             width,
@@ -28,7 +28,9 @@ class Graph3D  {
                 mouseDown: event => this.mouseDown(event),
                 mouseUp: () => this.mouseUp(),
                 mouseLeave: () => this.mouseLeave()
-            }});
+            }
+        });
+        this.renderScene();
     }
 
     wheel(event) {
@@ -60,6 +62,7 @@ class Graph3D  {
         }
     };
 
+
     mouseDown(event) {
         this.canMove = true;
         this.dx = event.offsetX
@@ -76,28 +79,72 @@ class Graph3D  {
     renderScene() {
         this.canvas.clear()
         this.figures.forEach(figure => {
-            figure.points.forEach(point => {
-                this.canvas.point(this.math3D.xs(point), this.math3D.ys(point), 'black');
-            });
-            ;
+            if (figure) {
+                figure.points.forEach(point => {
+                    this.canvas.point(this.math3D.xs(point), this.math3D.ys(point), 'black', 4);
+                });
+            };
         })
 
-            this.figures.forEach(figure => {
-                figure.edges.forEach(edge => {
-                    const point1 = figure.points[edge.p1];
-                    const point2 = figure.points[edge.p2];
-                    this.canvas.line(
-                        this.math3D.xs(point1),
-                        this.math3D.ys(point1),
-                        this.math3D.xs(point2),
-                        this.math3D.ys(point2),
-                        2, 'green'
-                    );
-                });
+        this.figures.forEach(figure => {
+            figure.edges.forEach(edge => {
+                const point1 = figure.points[edge.p1];
+                const point2 = figure.points[edge.p2];
+                this.canvas.line(
+                    this.math3D.xs(point1),
+                    this.math3D.ys(point1),
+                    this.math3D.xs(point2),
+                    this.math3D.ys(point2),
+                    2, 'green'
+                );
             });
+        });
+
+        const polygons = [];
+        this.figures.forEach(figure => {
+            if (figure) {
+                this.math3D.calcCenters(figure);
+                this.math3D.calcDistance(
+                    figure,
+                    this.WIN.CAMERA,
+                    'distance',
+                );
+
+                this.math3D.calcDistance(
+                    figure,
+                    this.LIGHT,
+                    'lumen',
+                );
+
+                figure.polygons.forEach((polygon) => {
+                    const points = [];
+                    for (let i = 0; i < polygon.points.length; i++) {
+                        points.push(figure.points[polygon.points[i]]);
+                    };
         
+                    let { r, g, b } = polygon.color;
+                    const lumen = this.math3D.calcIllumination(polygon.distance, this.LIGHT.lumen);
+                    r = Math.round(r * lumen);
+                    g = Math.round(g * lumen);
+                    b = Math.round(b * lumen);
+        
+                    this.canvas.polygon(
+                        points.map((point) => {
+                            return {
+                                x: this.math3D.xs(point),
+                                y: this.math3D.ys(point),
+                            };
+                        }),
+                        polygon.rgbToColor(r, g, b),
+                    );
+                })
+
+                this.math3D.sortByArtistAlgoritm(figure.polygons);
+            }
+        })
+
 
     }
 
-    
+
 }
