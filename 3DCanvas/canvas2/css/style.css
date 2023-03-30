@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: #efa7f6;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+canvas {
+    cursor: grab;
+    border: 1px solid black;
+}
+
+canvas:active {
+    cursor: grabbing;
+}
+
+.funcInputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Block input::-webkit-outer-spin-button,
+.Block input::-webkit-inner-spin-button {
+    appearance: none;
+}
+
+.Block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.Block input {
+    width: 80px;
+    height: 16px;
+    margin: 1px;
+    text-align: center;
+    outline: none;
+    border: solid 1px black;
+    border-radius: 2px;
+}
+
+.Block input:hover{
+    border: solid 1px rgb(169, 169, 169);
+    border-bottom: 2px solid rgb(60, 6, 72);
+}
+
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(174, 123, 183);
+    width: 30%;
+    height: 100vh;
+    max-height: 100vh;
+    scrollbar-gutter: stable;
+    top: 0;
+    left: 0;
+    transition: 1s;
+    transform: translateX(-100%);
+}
+
+.active-container {
+    transform: translateX(0%);
+}
+
+.menu-button {
+    position: absolute;
+    border: solid 1px rgb(94, 2, 146);
+    border-radius: 50%;
+    top: 5px;
+    right: -35px;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(144, 0, 255);
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.deleteFunc {
+    width: 15px;
+    height: 15px;
+    background-color: azure;
+    text-align: center;
+    line-height: 15px;
+    user-select: none;
+}
+
+#addFunction {
+    width: 90px;
+    height: 20px;
+    margin-top: 5px;
+    text-align: center;
+    background-color: azure;
+    user-select: none;
+    border: solid 1px black;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+#addFunction:hover,
+.deleteFunc:hover {
+    cursor: pointer;
+}
+
+.checkDerivative{
+    width: 5px;
+}

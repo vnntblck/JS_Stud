@@ -1,0 +1,10 @@
+body {
+    background: #333;
+}
+
+canvas {
+    display: block;
+    background-color: aliceblue;
+    width: 500px;
+    height: 500px;
+}
