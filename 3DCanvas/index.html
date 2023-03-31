@@ -8,22 +8,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- <div class="container">
-        <canvas id="canvas2d"></canvas>
-        <div class="menu-button"></div>
-        <div id="addFunction"> Добавить </div>
-        <div class="funcInputs"></div>
-    </div> -->
     <div class="container">
         <div class ="canvas3D">
-            <button id="sphere">sphere</button>
-            <button id="cube">cube</button>
+            <div class="figureSelector">
+                <select id="figures">
+                    <option class ="option" selected="selected">cube</option>
+                    <option class ="option" >sphere</option>
+                </select>
+            </div>
             <canvas id="canvas3d"></canvas>
         </div>
     </div>
         
     </canvas>
-    <!-- <script src="/canvas2/js/ui.js"></script> -->
     <script src="/3DCanvas/canvas2/js/graph2d.js"></script>
     <script src="Graph3D.js"></script>
     <script src="/3DCanvas/canvas2/js/canvas.js"></script>

@@ -78,27 +78,9 @@ class Graph3D {
     };
     renderScene() {
         this.canvas.clear()
-        this.figures.forEach(figure => {
-            if (figure) {
-                figure.points.forEach(point => {
-                    this.canvas.point(this.math3D.xs(point), this.math3D.ys(point), 'black', 4);
-                });
-            };
-        })
+        
 
-        this.figures.forEach(figure => {
-            figure.edges.forEach(edge => {
-                const point1 = figure.points[edge.p1];
-                const point2 = figure.points[edge.p2];
-                this.canvas.line(
-                    this.math3D.xs(point1),
-                    this.math3D.ys(point1),
-                    this.math3D.xs(point2),
-                    this.math3D.ys(point2),
-                    2, 'green'
-                );
-            });
-        });
+    
 
         const polygons = [];
         this.figures.forEach(figure => {
@@ -110,11 +92,11 @@ class Graph3D {
                     'distance',
                 );
 
-                this.math3D.calcDistance(
+                /**this.math3D.calcDistance(
                     figure,
                     this.LIGHT,
                     'lumen',
-                );
+                );**/
 
                 figure.polygons.forEach((polygon) => {
                     const points = [];
@@ -123,7 +105,7 @@ class Graph3D {
                     };
         
                     let { r, g, b } = polygon.color;
-                    const lumen = this.math3D.calcIllumination(polygon.distance, this.LIGHT.lumen);
+                    const lumen = 1 //this.math3D.calcIllumination(polygon.distance, this.LIGHT.lumen);
                     r = Math.round(r * lumen);
                     g = Math.round(g * lumen);
                     b = Math.round(b * lumen);
@@ -135,14 +117,35 @@ class Graph3D {
                                 y: this.math3D.ys(point),
                             };
                         }),
-                        polygon.rgbToColor(r, g, b),
+                        polygon.rgbToHex(r, g, b),
                     );
                 })
 
-                this.math3D.sortByArtistAlgoritm(figure.polygons);
+                this.math3D.sortByArtistAlgorithm(figure.polygons);
             }
         })
 
+        this.figures.forEach(figure => {
+            figure.edges.forEach(edge => {
+                const point1 = figure.points[edge.p1];
+                const point2 = figure.points[edge.p2];
+                this.canvas.line(
+                    this.math3D.xs(point1),
+                    this.math3D.ys(point1),
+                    this.math3D.xs(point2),
+                    this.math3D.ys(point2),
+                    2, 'Black'
+                );
+            });
+        });
+
+        this.figures.forEach(figure => {
+            if (figure) {
+                figure.points.forEach(point => {
+                    this.canvas.point(this.math3D.xs(point), this.math3D.ys(point), 'black', 4);
+                });
+            };
+        })
 
     }
 

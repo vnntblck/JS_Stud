@@ -1,8 +1,7 @@
 class Figure {
-    constructor ({points = [], edges = [], polygons = [], x = 0, y = 0, z = 0}) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    constructor ({points = [], edges = [], polygons = [], color = '#ee8844', center = new Point}) {
+        this.center = center;
+        this.color = color;
         this.points = points;
         this.edges = edges;
         this.polygons = polygons;

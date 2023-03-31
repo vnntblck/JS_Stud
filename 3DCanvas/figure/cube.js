@@ -2,8 +2,8 @@ class Cube extends Figure {
     constructor({
         color = '#ee8844',
         size = 10,
-        x, y, z }) {
-        super({ color, x, y, z });
+        center }) {
+        super({ color, center });
         this.size = size / 2;
     
 
@@ -12,14 +12,14 @@ class Cube extends Figure {
 
     createPoints() {
         this.points = [
-            new Point(this.size + this.x, this.size + this.y, this.size + this.z),
-            new Point(-this.size + this.x, this.size + this.y, this.size + this.z),
-            new Point(this.size + this.x, -this.size + this.y, this.size + this.z),
-            new Point(-this.size + this.x, -this.size + this.y, this.size + this.z),
-            new Point(this.size + this.x, this.size + this.y, -this.size + this.z),
-            new Point(this.size + this.x, -this.size + this.y, -this.size + this.z),
-            new Point(-this.size + this.x, this.size + this.y, -this.size + this.z),
-            new Point(-this.size + this.x, -this.size + this.y, -this.size + this.z),
+            new Point(this.size + this.center.x, this.size + this.center.y, this.size + this.center.z),
+            new Point(-this.size + this.center.x, this.size + this.center.y, this.size + this.center.z),
+            new Point(this.size + this.center.x, -this.size + this.center.y, this.size + this.center.z),
+            new Point(-this.size + this.center.x, -this.size + this.center.y, this.size + this.center.z),
+            new Point(this.size + this.center.x, this.size + this.center.y, -this.size + this.center.z),
+            new Point(this.size + this.center.x, -this.size + this.center.y, -this.size + this.center.z),
+            new Point(-this.size + this.center.x, this.size + this.center.y, -this.size + this.center.z),
+            new Point(-this.size + this.center.x, -this.size + this.center.y, -this.size + this.center.z),
         ];
     }
 
