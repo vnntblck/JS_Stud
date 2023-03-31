@@ -11,7 +11,7 @@ class Graph3D {
         const height = 1000;
         const width = 1000;
         this.figureNumber = 0;
-        this.figures = [new Cube(5)];
+        this.figures = [];
         this.canMove = false;
 
         this.dx = 0;
@@ -31,6 +31,20 @@ class Graph3D {
             }
         });
         this.renderScene();
+        document.getElementById('addFigure').addEventListener('click',(event) => this.addFigure(event))
+    }
+
+    addFigure(event) {
+        const figure = event.target.dataset.figure;
+        document.getElementById('figureSelector').classList.remove('hide');
+        this.chooseFigure(figure)
+    }
+
+    chooseFigure(figure) {
+        switch(figure) {
+            case 'Cube': this.figures.push(new Cube(5));
+            break;
+        }
     }
 
     wheel(event) {

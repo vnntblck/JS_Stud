@@ -10,17 +10,16 @@
 <body>
     <div class="container">
         <div class ="canvas3D">
-            <div class="figureSelector">
-                <select id="figures">
-                    <option class ="option" selected="selected">cube</option>
-                    <option class ="option" >sphere</option>
-                </select>
-            </div>
             <canvas id="canvas3d"></canvas>
         </div>
     </div>
+    <button id="addFigure">Добавить</button>
+    <div id="figureSelector" class="hide">
+        <div data-figure="Cube">cube</div>
+        <div data-figure="Sphere">sphere</div>
+    </div>
         
-    </canvas>
+    
     <script src="/3DCanvas/canvas2/js/graph2d.js"></script>
     <script src="Graph3D.js"></script>
     <script src="/3DCanvas/canvas2/js/canvas.js"></script>
